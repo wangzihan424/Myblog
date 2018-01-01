@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block mycontent %}
+    {{ errors }}
+    <h1>{{ _('欢迎登录') }}</h1>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ login_form }}
+    </form>
+{% endblock %}

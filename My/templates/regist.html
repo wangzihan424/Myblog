@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block mycontent %}
+    {{ errors }}
+    <h1>{{ _('请注册') }}</h1>
+    <form action="{% url 'regist' %}" method="POST">
+        {% csrf_token %}
+        {{ regist_form }}
+    </form>
+{% endblock %}
+{% block myjs %}
+    <script>
+        $(function () {
+            $("#regist").submit(function (e) {
+                $.ajax({
+                    url:"{% url 'regist' %}",
+                    data:$("#regist").serialize(),
+                    type:"POST",
+                    dataType:"JSON",
+                    success :function (data,static) {
+                        if(data.static == 1){
+                            alert(data.mgs)
+                        }else {
+                            alert(data.mgs)
+                        }
+                    },
+                    error :function () {
+
+                    }
+                })
+                e.preventDefault()
+            })
+        })
+    </script>
+{% endblock %}
